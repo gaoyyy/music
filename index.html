@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>音乐播放器</title>
+    <style>
+        * {
+            margin:0;
+            padding:0;
+        }
+        body {
+            background-color:#FEB2B2;
+            color:#fff;
+        }
+        .pull-left {
+            float:left;
+        }
+        .pull-right {
+            float:right;
+        }
+        .clear-fix {
+            clear:both;
+        }
+        .box {
+            width: 600px;
+            height: 220px;
+            border:1px solid #ffffff;
+            border-radius: 10px;
+            margin:80px auto;
+            position: relative;
+            background-color: #9EDCB5;
+        }
+        .album {
+            padding:20px;
+        }
+        .album img{
+            width:140px;
+            height: 140px;
+            border-radius: 50%;
+        }
+        .music {
+            width: 400px;
+            margin:30px 20px 0 0;
+        }
+        .music-bar-box {
+            width: 400px;
+            height: 2px;
+            padding:5px 0;
+            margin:30px 0;
+        }
+        .music-bar {
+            width: 400px;
+            height: 2px;
+            background-color: #9FAAB5;
+            position: relative;
+        }
+        .circle {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #fff;
+            position: absolute;
+            top:-4px;
+            left:0;
+        }
+        .move-bar {
+            height: 2px;
+            background-color: #fff;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+        .music-ctrl {
+            margin-top:4px;
+        }
+        .prev {
+            width: 26px;
+            height: 26px;
+            background: url("playbar.png") -1px -130px;
+            margin: 2px 0 0 20px;
+            cursor: pointer;
+        }
+        .play {
+            width: 34px;
+            height: 34px;
+            margin:0 30px;
+            background: url("playbar.png") -153px -206px;
+            cursor: pointer;
+        }
+        .next {
+            width: 26px;
+            height: 26px;
+            background: url("playbar.png") -81px -130px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .control-bar {
+            width: 600px;
+            height: 40px;
+            position: absolute;
+            left:0;
+            bottom:0;
+            background-color: #270100;
+            border-radius: 0 0 10px 10px;
+        }
+        .music-order {
+            width: 26px;
+            height: 26px;
+            margin-left:20px;
+            background: url("playbar.png") -1px 276px;
+        }
+        .music-volume {
+            width: 26px;
+            height: 26px;
+            margin-left:20px;
+            background: url("playbar.png") -155px -244px;
+        }
+        .volume-bar-box {
+            width: 100px;
+            height: 2px;
+            margin-top:6px;
+            padding: 9px 10px 9px 1px;
+            background-color: rgba(0,0,0,0.1);
+            display: none;
+        }
+        .volume-bar {
+            width: 100px;
+            height: 2px;
+            background-color: #fff;
+            position: relative;
+        }
+        .volume-circle {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #fff;
+            position: absolute;
+            top:-3px;
+            left:100px;
+        }
+        .volume-move-bar {
+            width: 100px;
+            height: 2px;
+            position: absolute;
+            background-color: #00D2DC;
+        }
+        .music-mute {
+            width: 20px;
+            height: 26px;
+            margin-left:20px;
+            background: url("playbar.png") -260px -66px;
+        }
+        .search {
+            position: relative;
+        }
+        input {
+            width: 180px;
+            height: 20px;
+            margin:6px 0 0 20px;
+            text-indent: 5px;
+            font-size: 12px;
+            border:none;
+            outline: none;
+        }
+        .search-result {
+            list-style: none;
+            position: absolute;
+            left:20px;
+            top:27px;
+        }
+        .search-result li {
+            width: 180px;
+            height: 29px;
+            border-bottom: 1px solid #9EDCB5;
+            text-indent:5px;
+            line-height: 29px;
+            font-size: 12px;
+            background-color: #270100;
+            cursor: pointer;
+        }
+        .music-list {
+            float:right;
+            width: 60px;
+            height: 30px;
+            margin-right: 10px;
+            background: url("playbar.png") -196px -64px;
+            position: relative;
+        }
+        .list-text {
+            width: 36px;
+            height: 20px;
+            margin:7px 0 0 20px;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+        }
+        .prev:hover {
+            background-position-x: -31px;
+        }
+        .next:hover {
+            background-position-x: -111px;
+        }
+        .music-volume:hover {
+            background-position-x: -184px;
+        }
+        .music-list:hover {
+            background-position-y: -94px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="album pull-left">
+            <img src="" alt="">
+        </div>
+        <div class="music pull-left">
+            <div class="music-msg">
+                <div class="music-name pull-left"></div>
+                <div class="music-time pull-right"></div>
+            </div>
+            <div class="clear-fix"></div>
+            <div class="music-bar-box">
+                <div class="music-bar">
+                    <div class="circle"></div>
+                    <div class="move-bar"></div>
+                </div>
+            </div>
+        </div>
+        <div class="control-bar">
+            <div class="music-ctrl">
+                <div class="prev pull-left"></div>
+                <div class="play pull-left"></div>
+                <div class="next pull-left"></div>
+                <div class="music-order pull-left"></div>
+                <div class="music-volume pull-left"></div>
+                <div class="volume-bar-box pull-left">
+                    <div class="volume-bar">
+                        <div class="volume-circle"></div>
+                        <div class="volume-move-bar"></div>
+                    </div>
+                </div>
+                <div class="music-mute pull-left"></div>
+                <div class="search pull-left">
+                    <input type="text">
+                    <ul class="search-result"></ul>
+                    <!--<div class="nextPage"></div>-->
+                    <!--<div class="prevPage"></div>-->
+                </div>
+                <div class="music-list pull-right">
+                    <div class="list-text"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <audio></audio>
+</body>
+<script src="js/data.js"></script>
+<script src="js/js.js"></script>
+</html>
